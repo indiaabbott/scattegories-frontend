@@ -5,9 +5,7 @@ interface PlayerCardProps {
 }
 
 function PlayerCard(props: PlayerCardProps) {
-    return(<div>
-        {props.player}
-        </div>)
+    return(<li className="list-group-item">{props.player}</li>)
 }
 
 export default PlayerCard;

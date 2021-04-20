@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PlayerCard from './PlayerCard';
+import './PlayerList.css';
+
 
 interface Player {
     player: string,
@@ -42,11 +44,13 @@ function PlayerList() {
     };
 
 
-    return(<div>
-        <input placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)}></input>
-        <button onClick={addPlayerAndUpdate}>Add</button>
-        <button onClick={removeAllPlayers}>Remove all players...</button>
-        <div>{playersArray.map((player) => <PlayerCard key={player.player} player={player.player} />)}</div>
+    return(<div className="container">
+        <div className = "form-inline">
+        <input className="form-control" placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)}></input>
+        <button type="button" className="btn btn-success" onClick={addPlayerAndUpdate}>Add</button>
+        <button type="button" className="btn btn-danger" onClick={removeAllPlayers}>Remove all players...</button>
+        </div>
+        <ul className="list-group">{playersArray.map((player) => <PlayerCard key={player.player} player={player.player} />)}</ul>
     </div>)
 }
 
