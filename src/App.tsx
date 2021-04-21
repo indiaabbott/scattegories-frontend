@@ -5,9 +5,8 @@ import PlayerList from './Components/PlayerList';
 
 
 function App() {
-  const appStyle = {backgroundColor: "#adcbe3"}
-  return (<div style={appStyle}>
-    <div className="page-header">
+  return (<div>
+    <div className="page-header bg-secondary text-white">
       <h1>✨ Scattergories</h1>
     </div>
     <ScattegoriesContent />

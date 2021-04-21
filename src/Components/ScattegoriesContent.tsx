@@ -10,6 +10,7 @@ function ScattegoriesContent() {
 
     const [randomCategory, setRandomCategory] = useState("");
     const [randomLetter, setRandomLetter] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const getRandomCategory = async () => {
         const response = await fetch("https://scattegories-backend-hi.herokuapp.com/category");
@@ -25,28 +26,20 @@ function ScattegoriesContent() {
     const randomise = () => {
         getRandomCategory()
         getRandomLetter()
+        setIsDisabled(false)
     }
 
-    const myStyle = {color: "white", backgroundColor: "#4b86b4", marginTop: 5, border: "double", borderColor: "#2a4d69"}
+    const startGame = () => {
+        console.log("hi")
+    }
 
-    return (<div>
-        <div className="custom-button">
-        <button style={myStyle} type="button" className="btn btn-custom btn-lg" onClick={randomise}>RANDOMISE</button>
-        </div>
-        <div className="row">
-            <div className="col-sm-3">
-                <div className="panel panel-primary">
-                    <div className="panel-heading">Your random category is...</div>
-                    <div className="panel-body">{randomCategory}</div>
-                </div>
-            </div>
-            <div className="col-sm-3">Your random letter is: {randomLetter}</div>
-            <div className="col-sm-3"></div>
-        </div>
+    return (<div className="container-fluid">
+        <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-outline-success btn-lg" onClick={randomise}>RANDOMISE</button>
+        <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-success btn-lg" onClick={startGame} disabled={isDisabled}>✓</button>
+        <p>• Your random category is <b>{randomCategory}</b></p>
+        <p>• Your random letter is <b>{randomLetter}</b></p>
     </div>
     );
 }
 
 export default ScattegoriesContent;
-
-//style={{textAlign: "center", border: "double", borderRadius: 5, borderWidth:5}}

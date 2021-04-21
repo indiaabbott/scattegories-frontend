@@ -4,6 +4,7 @@ import './PlayerList.css';
 
 
 interface Player {
+    id: number,
     player: string,
 };
 
@@ -44,13 +45,15 @@ function PlayerList() {
     };
 
 
-    return(<div className="container">
+    return(<div className="container-fluid">
         <div className = "form-inline">
         <input className="form-control" placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)}></input>
         <button type="button" className="btn btn-success" onClick={addPlayerAndUpdate}>Add</button>
         <button type="button" className="btn btn-danger" onClick={removeAllPlayers}>Remove all players...</button>
         </div>
-        <ul className="list-group">{playersArray.map((player) => <PlayerCard key={player.player} player={player.player} />)}</ul>
+        <div className="container-fluid">
+        <div className="row">{playersArray.map((player, index) => <PlayerCard key={player.player} player={player.player} playerNumber={index+1} />)}</div>
+        </div>
     </div>)
 }
 
