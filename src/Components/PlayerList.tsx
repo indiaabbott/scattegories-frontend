@@ -8,7 +8,11 @@ interface Player {
     player: string,
 };
 
-function PlayerList() {
+interface IPlayerProps {
+    disabled: boolean
+}
+
+function PlayerList(props: IPlayerProps) {
     const [playerName, setPlayerName] = useState("")
     const [playersArray, setPlayersArray] = useState<Player[]>([])
     useEffect(() => {fetchAndStorePlayers()}, [])
@@ -45,11 +49,11 @@ function PlayerList() {
     };
 
 
-    return(<div className="container-fluid">
+    return(<div>
         <div className = "form-inline">
-        <input className="form-control" placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)}></input>
-        <button type="button" className="btn btn-success" onClick={addPlayerAndUpdate}>Add</button>
-        <button type="button" className="btn btn-danger" onClick={removeAllPlayers}>Remove all players...</button>
+        <input className="form-control" placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)} disabled={props.disabled}></input>
+        <button type="button" className="btn btn-success" onClick={addPlayerAndUpdate} disabled={props.disabled}>Add</button>
+        <button type="button" className="btn btn-danger" onClick={removeAllPlayers} disabled={props.disabled}>Remove all players...</button>
         </div>
         <div className="container-fluid">
         <div className="row">{playersArray.map((player, index) => <PlayerCard key={player.player} player={player.player} playerNumber={index+1} />)}</div>

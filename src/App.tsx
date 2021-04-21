@@ -1,16 +1,14 @@
 import React from 'react';
 import './App.css';
 import ScattegoriesContent from './Components/ScattegoriesContent';
-import PlayerList from './Components/PlayerList';
 
 
 function App() {
   return (<div>
-    <div className="page-header bg-secondary text-white">
+    <div className="page-header" style={{backgroundColor: "#f7f7f7"}}>
       <h1>✨ Scattergories</h1>
     </div>
     <ScattegoriesContent />
-    <PlayerList />
   </div>);
 }
 
