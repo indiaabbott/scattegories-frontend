@@ -80,12 +80,19 @@ function ScattegoriesContent() {
         setIsCheckButtonClicked(true)
     }
 
+    const checkListOfPlayers = () => {
+        if (playersArray.length >= 1 && isCheckButtonClicked===true) {
+            return <PlayerTurn playersArray={playersArray} isCheckButtonClicked={isCheckButtonClicked}/>
+        }
+        else {return <h5 style={{ fontFamily: "Merienda One" }}>Waiting for game to start...</h5>}
+    }
+
     return (<div className="container-fluid">
         <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-outline-success btn-lg" onClick={randomise} disabled={isInputDisabled}>RANDOMISE</button>
         <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-success btn-lg" onClick={startGame} disabled={isCheckButtonDisabled}>✓</button>
         <p>• Your random category is <b>{randomCategory}</b></p>
         <p>• Your random letter is <b>{randomLetter}</b></p>
-        <PlayerTurn playersArray={playersArray} isCheckButtonClicked={isCheckButtonClicked}/>
+        {checkListOfPlayers()}
         <div className = "form-inline">
         <input className="form-control" placeholder="Player name here..." value={playerName} onChange={e => setPlayerName(e.target.value)} disabled={isInputDisabled}></input>
         <button type="button" className="btn btn-success" onClick={addPlayerAndUpdate} disabled={isInputDisabled}>Add</button>
