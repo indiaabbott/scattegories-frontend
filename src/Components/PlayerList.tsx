@@ -17,7 +17,7 @@ function PlayerList(props: IPlayerProps) {
 
     return(<div>
         <div className="container-fluid">
-        <div className="row">{props.playersArray.map((player, index) => <PlayerCard key={player.player} player={player.player} playerNumber={index+1} />)}</div>
+        <div className="row">{props.playersArray.map((player, index) => <PlayerCard key={player.player} player={player.player} playerNumber={index+1} in_game={player.in_game} />)}</div>
         </div>
     </div>)
 }

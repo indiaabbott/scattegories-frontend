@@ -52,6 +52,7 @@ function ScattegoriesContent() {
         await fetch("https://scattegories-backend-hi.herokuapp.com/names", {
             method: "DELETE",
         });
+        fetchAndStorePlayers()
         //call get players function
     };
 
@@ -82,9 +83,9 @@ function ScattegoriesContent() {
 
     const checkListOfPlayers = () => {
         if (playersArray.length >= 1 && isCheckButtonClicked===true) {
-            return <PlayerTurn playersArray={playersArray} isCheckButtonClicked={isCheckButtonClicked}/>
+            return <PlayerTurn playersArray={playersArray} isCheckButtonClicked={isCheckButtonClicked} fetchAndStorePlayers={fetchAndStorePlayers}/>
         }
-        else {return <h5 style={{ fontFamily: "Merienda One" }}>Waiting for game to start...</h5>}
+        else {return <h5>Waiting for game to start...</h5>}
     }
 
     return (<div className="container-fluid">

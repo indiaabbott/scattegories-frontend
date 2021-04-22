@@ -9,3 +9,8 @@
 .form-inline {
     margin-bottom: 5px;
 }
+
+/* more specific - strongest rule */
+.list-group-item.item-not-in-game {
+    background-color: grey;
+}
