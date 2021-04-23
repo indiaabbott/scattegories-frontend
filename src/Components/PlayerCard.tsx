@@ -6,8 +6,6 @@ interface PlayerCardProps {
     playerNumber: number,
     in_game: string
 }
-//if in game false, inline styling grey or add classname
-
 
 function PlayerCard(props: PlayerCardProps) {
 

@@ -9,10 +9,11 @@ interface Player {
 };
 
 interface IPlayerProps {
-    disabled: boolean,
     playersArray: Player[],
 }
 
+
+//map over my list of players, each element is applied styling outlined by the PlayerCard component
 function PlayerList(props: IPlayerProps) {
 
     return(<div>

@@ -97,14 +97,16 @@ function ScattegoriesContent() {
         setIsCheckButtonClicked(false)
     }
 
-    //conditionally render a component depending on whether game is in play - both render a h5
+    //Conditionally render a component depending on whether game is in play or not
     const checkListOfPlayers = () => {
         if (playersArray.length >= 1 && isCheckButtonClicked===true) {
-            return <PlayerTurn playersArray={playersArray} isCheckButtonClicked={isCheckButtonClicked} fetchAndStorePlayers={fetchAndStorePlayers}/>
+            return <PlayerTurn playersArray={playersArray}  
+            fetchAndStorePlayers={fetchAndStorePlayers}/>
         }
         else {return <h5>Waiting for game to start...</h5>}
     }
 
+    //return buttons and a PlayerList component that displays the list of players
     return (<div className="container-fluid">
         <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-outline-success btn-lg" onClick={randomise} disabled={isInputDisabled}>RANDOMISE</button>
         <button style={{marginTop:10, marginBottom: 5}} type="button" className="btn btn-success btn-lg" onClick={startGame} disabled={isCheckButtonDisabled}>✓</button>
@@ -117,7 +119,7 @@ function ScattegoriesContent() {
         <button type="button" className="btn btn-danger" onClick={removeAllPlayers} disabled={isInputDisabled}>Remove all players...</button>
         <button type="button" className="btn btn-warning" onClick={reset}>Reset</button>
         </div>
-        <PlayerList disabled={isInputDisabled} playersArray={playersArray}/>
+        <PlayerList playersArray={playersArray}/>
     </div>
     );
 }

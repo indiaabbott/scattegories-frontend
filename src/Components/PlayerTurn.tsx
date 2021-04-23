@@ -8,23 +8,26 @@ interface Player {
 
 interface IPlayerTurnProps {
     playersArray: Player[],
-    isCheckButtonClicked: boolean,
     fetchAndStorePlayers: ()=>void,
 }
 
 function PlayerTurn(props: IPlayerTurnProps) {
-    // let randomPlayer = props.playersArray[(Math.floor(Math.random() * props.playersArray.length))]?.player
-    const [currentPlayer, setCurrentPlayer] = useState(chooseRandomPlayer())
+    const [currentPlayer, setCurrentPlayer] = useState(chooseRandomPlayer()) //the player whose go it is
 
+    //filter for players who are not eliminated and select player at a random index from resulting array
     function chooseRandomPlayer() {
         let playersInGame = props.playersArray.filter(player => player.in_game === 'true')
         let randomPlayer = playersInGame[(Math.floor(Math.random() * playersInGame.length))]?.player
         return randomPlayer;
     }
 
+    //Next button functionality 
     function handleNext() {
-        let currentIndex = props.playersArray.findIndex(player => player.player === currentPlayer) //number of current index
+        let currentIndex = props.playersArray.findIndex(player => player.player === currentPlayer) //current player's index
         let playersInGameProperty = 'false'
+
+        //we want to skip over players who are 'out' the game - their in_game property is 'false'
+        //we will display a player only when their in_game property is true (and exit the while loop)
 
         while (playersInGameProperty === 'false') {
             if (currentIndex === props.playersArray.length-1) {
@@ -42,6 +45,8 @@ function PlayerTurn(props: IPlayerTurnProps) {
         }
     }
 
+    //when you delete a player, you update their in_game property to false - and make a get request so parent knows to update its playerArray
+    //, allowing it to signal to the PlayerList component that there has been a change & to use diff styling. Then go to next player
     const handleDelete = async() => {
         const dataToSend = {in_game: "false"}
         await fetch(`https://scattegories-backend-hi.herokuapp.com/names/${currentPlayer}`, {
@@ -53,9 +58,6 @@ function PlayerTurn(props: IPlayerTurnProps) {
         handleNext()
     };
 
-    //person who is not in the game - name appears differnet (struck through) in list component
-    //then figure out skipping
-
     return (<div>
                 <h5>It's {currentPlayer}'s turn</h5>
                 <div>
@@ -66,12 +68,3 @@ function PlayerTurn(props: IPlayerTurnProps) {
 }
 
 export default PlayerTurn;
-
-// // function shuffleArray() {
-//     for (let i=0; i<props.playersArray.length; i++) {
-//         let x = props.playersArray[i]; //on first iteration of loop, this will be first element
-//         let y = Math.floor(Math.random() * (i+1)); //on first iteration of loop, this will give 0
-//         props.playersArray[i] = props.playersArray[y];
-//         props.playersArray[y] = x;
-//     }
-// }
