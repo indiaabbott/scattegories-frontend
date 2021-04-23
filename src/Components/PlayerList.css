@@ -2,13 +2,7 @@
     margin-left: 3px;
 }
 
-.btn-danger {
-    margin-left: 3px;
-}
 
-.form-inline {
-    margin-bottom: 5px;
-}
 
 /* more specific - strongest rule */
 .list-group-item.item-not-in-game {

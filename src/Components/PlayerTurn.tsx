@@ -13,21 +13,19 @@ interface IPlayerTurnProps {
 }
 
 function PlayerTurn(props: IPlayerTurnProps) {
+    // let randomPlayer = props.playersArray[(Math.floor(Math.random() * props.playersArray.length))]?.player
+    const [currentPlayer, setCurrentPlayer] = useState(chooseRandomPlayer())
 
-    let randomPlayer = props.playersArray[(Math.floor(Math.random() * props.playersArray.length))]?.player
-    console.log("random player is " + randomPlayer)
-    const [currentPlayer, setCurrentPlayer] = useState(randomPlayer)
-    console.log("current player is " + currentPlayer)
+    function chooseRandomPlayer() {
+        let playersInGame = props.playersArray.filter(player => player.in_game === 'true')
+        let randomPlayer = playersInGame[(Math.floor(Math.random() * playersInGame.length))]?.player
+        return randomPlayer;
+    }
 
-//if someone's in game is false, skip them
-//check if person at index+1 in_game property is true or false
-//if false, check if person at index+2 has an in_game property of true or false
-//keep doing this until index+{x} has a person whose in_game property is true
-//at which point display that person
     function handleNext() {
         let currentIndex = props.playersArray.findIndex(player => player.player === currentPlayer) //number of current index
         let playersInGameProperty = 'false'
-        
+
         while (playersInGameProperty === 'false') {
             if (currentIndex === props.playersArray.length-1) {
                 console.log(currentIndex + " is the max index")
@@ -52,6 +50,7 @@ function PlayerTurn(props: IPlayerTurnProps) {
             headers: {'Content-Type': 'application/json'}
         });
         props.fetchAndStorePlayers()
+        handleNext()
     };
 
     //person who is not in the game - name appears differnet (struck through) in list component
